@@ -26,7 +26,7 @@ namespace ObjectNamespace {
         void SetBitmap(Bitmap^ bitmapNew);
         void DrawVertex(int x, int y, System::String ^number);
         void DrawSelectedVertex(int x, int y);
-        void DrawEdge(Vertex^ V1, Vertex^ V2, Edge^ E, int numberE);
+        void DrawEdge(Vertex^ V1, Vertex^ V2, Edge^ E, String^ weight);
         void DrawALLGraph(List<Vertex^>^ V, List<Edge^>^ E, List<Tuple<int, int>^>^ MSTEdges);
         void FillAdjacencyMatrix(int numberV, List<Edge^>^ E, List<List<System::Int32>^>^ matrix);
         void VisualizeGraphByAdjacencyMatrix();

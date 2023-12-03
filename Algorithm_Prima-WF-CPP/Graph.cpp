@@ -55,22 +55,21 @@ namespace ObjectNamespace {
         {
             g->DrawEllipse(redPen, (x - R), (y - R), 2 * R, 2 * R);
         }
-        void DrawGraph::DrawEdge(Vertex^ V1, Vertex^ V2, Edge^ E, int numberE)
+        void DrawGraph::DrawEdge(Vertex^ V1, Vertex^ V2, Edge^ E, String^ weight)
         {
             if (E->V1 == E->V2)
             {
                 g->DrawArc(blackPen, (V1->X - 2 * R), (V1->Y - 2 * R), 2 * R, 2 * R, 90, 270);
                 point = PointF::PointF(V1->X - (int)(2.75 * R), V1->Y - (int)(2.75 * R));
-                System::Char k = char(int('A') + numberE);
-                g->DrawString(k.ToString(), fo, brushBlack, point);
+
+                g->DrawString(weight, fo, brushBlack, point);
                 DrawVertex(V1->X, V1->Y, (E->V1 + 1).ToString());
             }
             else
             {
                 g->DrawLine(blackPen, V1->X, V1->Y, V2->X, V2->Y);
                 point = PointF::PointF((V1->X + V2->X) / 2, (V1->Y + V2->Y) / 2);
-                System::Char k = char(int('A') + numberE);
-                g->DrawString(k.ToString(), fo, brushBlack, point);
+                g->DrawString(weight, fo, brushBlack, point);
                 DrawVertex(V1->X, V1->Y, (E->V1 + 1).ToString());
                 DrawVertex(V2->X, V2->Y, (E->V2 + 1).ToString());
             }
@@ -81,24 +80,23 @@ namespace ObjectNamespace {
         {
             for (int i = 0; i < E->Count; i++)
             {
-                System::Char k = char(int('A') + i);
                 if (E[i]->V1 == E[i]->V2)
                 {
 
                     g->DrawArc(blackPen, (V[E[i]->V1]->X - 2 * R), (V[E[i]->V1]->Y - 2 * R), 2 * R, 2 * R, 90, 270);
                     point = PointF::PointF(V[E[i]->V1]->X - (int)(2.75 * R), V[E[i]->V1]->Y - (int)(2.75 * R));
-                    g->DrawString(k.ToString(), fo, brushBlack, point);
+                    g->DrawString(E[i]->Weight.ToString(), fo, brushBlack, point);
                 }
                 else
                 {
                     point = PointF::PointF((V[E[i]->V1]->X + V[E[i]->V2]->X) / 2, (V[E[i]->V1]->Y + V[E[i]->V2]->Y) / 2);
                     if (MSTEdges && (MSTEdges->Contains(gcnew Tuple<int, int>(E[i]->V1, E[i]->V2)) || MSTEdges->Contains(gcnew Tuple<int, int>(E[i]->V2, E[i]->V1)))) {
                         g->DrawLine(redPen, V[E[i]->V1]->X, V[E[i]->V1]->Y, V[E[i]->V2]->X, V[E[i]->V2]->Y);
-                        g->DrawString(k.ToString(), fo, brushRed, point);
+                        g->DrawString(E[i]->Weight.ToString(), fo, brushRed, point);
                     }
                     else {
                         g->DrawLine(blackPen, V[E[i]->V1]->X, V[E[i]->V1]->Y, V[E[i]->V2]->X, V[E[i]->V2]->Y);
-                        g->DrawString(k.ToString(), fo, brushBlack, point);
+                        g->DrawString(E[i]->Weight.ToString(), fo, brushBlack, point);
                     }
 
 

@@ -54,13 +54,13 @@ namespace FormNamespace {
 	private: System::Windows::Forms::Button^ drawVertexButton;
 
 	private: System::Windows::Forms::Button^ deleteButton;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ V1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ V2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Weight;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Letter;
+
+
+
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label3;
+
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::NumericUpDown^ countVertexMatrixGridNumericUpDown;
 	private: System::Windows::Forms::Label^ InfoMatrixGridLabel;
@@ -71,6 +71,17 @@ namespace FormNamespace {
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Button^ selectButton;
 	private: System::Windows::Forms::Label^ InfoChoicedVertexLabel;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ V1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ V2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Weight;
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ ÒÔ‡‚Í‡ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ‚ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ‚˚ıÓ‰ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ toolStripMenuItem2;
+
+
+
 
 
 
@@ -141,13 +152,12 @@ namespace FormNamespace {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Form::typeid));
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle7 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle8 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->lengthGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->V1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->V2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Weight = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Letter = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->drawEdgeButton = (gcnew System::Windows::Forms::Button());
 			this->clearButton = (gcnew System::Windows::Forms::Button());
 			this->sheet = (gcnew System::Windows::Forms::PictureBox());
@@ -161,7 +171,6 @@ namespace FormNamespace {
 			this->deleteButton = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->countVertexMatrixGridNumericUpDown = (gcnew System::Windows::Forms::NumericUpDown());
 			this->InfoMatrixGridLabel = (gcnew System::Windows::Forms::Label());
@@ -172,12 +181,18 @@ namespace FormNamespace {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->selectButton = (gcnew System::Windows::Forms::Button());
 			this->InfoChoicedVertexLabel = (gcnew System::Windows::Forms::Label());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->ÒÔ‡‚Í‡ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->‚ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem2 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->‚˚ıÓ‰ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->lengthGrid))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sheet))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->matrixGrid))->BeginInit();
 			this->typeInputGroup->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->countVertexMatrixGridNumericUpDown))->BeginInit();
 			this->typeMSTMoveGroupBox->SuspendLayout();
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// lengthGrid
@@ -185,15 +200,16 @@ namespace FormNamespace {
 			this->lengthGrid->AllowUserToAddRows = false;
 			this->lengthGrid->AllowUserToDeleteRows = false;
 			this->lengthGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->lengthGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+			this->lengthGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
 				this->V1, this->V2,
-					this->Weight, this->Letter
+					this->Weight
 			});
-			this->lengthGrid->Location = System::Drawing::Point(503, 466);
+			this->lengthGrid->Location = System::Drawing::Point(503, 627);
 			this->lengthGrid->Name = L"lengthGrid";
-			this->lengthGrid->Size = System::Drawing::Size(344, 171);
+			this->lengthGrid->Size = System::Drawing::Size(466, 40);
 			this->lengthGrid->TabIndex = 14;
-			this->lengthGrid->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Form::lengthGrid_CellValueChanged);
+			this->lengthGrid->Visible = false;
+			this->lengthGrid->RowsAdded += gcnew System::Windows::Forms::DataGridViewRowsAddedEventHandler(this, &Form::lengthGrid_RowsAdded);
 			// 
 			// V1
 			// 
@@ -213,19 +229,14 @@ namespace FormNamespace {
 			// 
 			this->Weight->HeaderText = L"ƒÎËÌ‡";
 			this->Weight->Name = L"Weight";
-			// 
-			// Letter
-			// 
-			this->Letter->HeaderText = L"¡ÛÍ‚‡";
-			this->Letter->Name = L"Letter";
-			this->Letter->ReadOnly = true;
+			this->Weight->ReadOnly = true;
 			// 
 			// drawEdgeButton
 			// 
 			this->drawEdgeButton->BackColor = System::Drawing::Color::White;
 			this->drawEdgeButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->drawEdgeButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"drawEdgeButton.Image")));
-			this->drawEdgeButton->Location = System::Drawing::Point(445, 152);
+			this->drawEdgeButton->Location = System::Drawing::Point(445, 171);
 			this->drawEdgeButton->Name = L"drawEdgeButton";
 			this->drawEdgeButton->Size = System::Drawing::Size(52, 52);
 			this->drawEdgeButton->TabIndex = 13;
@@ -237,7 +248,7 @@ namespace FormNamespace {
 			this->clearButton->BackColor = System::Drawing::Color::White;
 			this->clearButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->clearButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"clearButton.Image")));
-			this->clearButton->Location = System::Drawing::Point(445, 268);
+			this->clearButton->Location = System::Drawing::Point(445, 287);
 			this->clearButton->Name = L"clearButton";
 			this->clearButton->Size = System::Drawing::Size(52, 52);
 			this->clearButton->TabIndex = 11;
@@ -247,9 +258,9 @@ namespace FormNamespace {
 			// sheet
 			// 
 			this->sheet->BackColor = System::Drawing::Color::White;
-			this->sheet->Location = System::Drawing::Point(503, 36);
+			this->sheet->Location = System::Drawing::Point(503, 55);
 			this->sheet->Name = L"sheet";
-			this->sheet->Size = System::Drawing::Size(692, 380);
+			this->sheet->Size = System::Drawing::Size(692, 520);
 			this->sheet->TabIndex = 10;
 			this->sheet->TabStop = false;
 			this->sheet->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Form::sheet_MouseClick);
@@ -258,27 +269,27 @@ namespace FormNamespace {
 			// 
 			this->matrixGrid->AllowUserToAddRows = false;
 			this->matrixGrid->AllowUserToDeleteRows = false;
-			dataGridViewCellStyle7->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle7->BackColor = System::Drawing::SystemColors::Control;
-			dataGridViewCellStyle7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::Control;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			dataGridViewCellStyle7->ForeColor = System::Drawing::SystemColors::WindowText;
-			dataGridViewCellStyle7->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle7->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle7->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->matrixGrid->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle1->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->matrixGrid->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->matrixGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->matrixGrid->Location = System::Drawing::Point(15, 208);
 			this->matrixGrid->Name = L"matrixGrid";
-			dataGridViewCellStyle8->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
-			dataGridViewCellStyle8->BackColor = System::Drawing::SystemColors::Control;
-			dataGridViewCellStyle8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle2->BackColor = System::Drawing::SystemColors::Control;
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			dataGridViewCellStyle8->ForeColor = System::Drawing::SystemColors::WindowText;
-			dataGridViewCellStyle8->SelectionBackColor = System::Drawing::SystemColors::Highlight;
-			dataGridViewCellStyle8->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
-			dataGridViewCellStyle8->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->matrixGrid->RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle2->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle2->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->matrixGrid->RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			this->matrixGrid->Size = System::Drawing::Size(361, 208);
 			this->matrixGrid->TabIndex = 15;
 			this->matrixGrid->CellEnter += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Form::matrixGrid_CellEnter);
@@ -306,7 +317,7 @@ namespace FormNamespace {
 			// 
 			this->typeInputGroup->Controls->Add(this->typeInputRadioButton_1);
 			this->typeInputGroup->Controls->Add(this->typeInputRadioButton_2);
-			this->typeInputGroup->Location = System::Drawing::Point(12, 22);
+			this->typeInputGroup->Location = System::Drawing::Point(12, 46);
 			this->typeInputGroup->Name = L"typeInputGroup";
 			this->typeInputGroup->Size = System::Drawing::Size(200, 100);
 			this->typeInputGroup->TabIndex = 22;
@@ -340,7 +351,7 @@ namespace FormNamespace {
 			this->drawVertexButton->BackColor = System::Drawing::Color::White;
 			this->drawVertexButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->drawVertexButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"drawVertexButton.Image")));
-			this->drawVertexButton->Location = System::Drawing::Point(445, 94);
+			this->drawVertexButton->Location = System::Drawing::Point(445, 113);
 			this->drawVertexButton->Name = L"drawVertexButton";
 			this->drawVertexButton->Size = System::Drawing::Size(52, 52);
 			this->drawVertexButton->TabIndex = 23;
@@ -352,7 +363,7 @@ namespace FormNamespace {
 			this->deleteButton->BackColor = System::Drawing::Color::White;
 			this->deleteButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->deleteButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"deleteButton.Image")));
-			this->deleteButton->Location = System::Drawing::Point(445, 210);
+			this->deleteButton->Location = System::Drawing::Point(445, 229);
 			this->deleteButton->Name = L"deleteButton";
 			this->deleteButton->Size = System::Drawing::Size(52, 52);
 			this->deleteButton->TabIndex = 24;
@@ -375,22 +386,11 @@ namespace FormNamespace {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(500, 9);
+			this->label2->Location = System::Drawing::Point(500, 28);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(168, 18);
 			this->label2->TabIndex = 26;
 			this->label2->Text = L"ŒÚÓ·‡ÊÂÌËÂ „‡Ù‡";
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label3->Location = System::Drawing::Point(500, 434);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(117, 18);
-			this->label3->TabIndex = 27;
-			this->label3->Text = L"—ÔËÒÓÍ ∏·Â";
 			// 
 			// label4
 			// 
@@ -435,7 +435,7 @@ namespace FormNamespace {
 			// 
 			// momentButton
 			// 
-			this->momentButton->Location = System::Drawing::Point(16, 67);
+			this->momentButton->Location = System::Drawing::Point(16, 54);
 			this->momentButton->Name = L"momentButton";
 			this->momentButton->Size = System::Drawing::Size(174, 23);
 			this->momentButton->TabIndex = 32;
@@ -447,9 +447,9 @@ namespace FormNamespace {
 			// 
 			this->typeMSTMoveGroupBox->Controls->Add(this->momentButton);
 			this->typeMSTMoveGroupBox->Controls->Add(this->stageButton);
-			this->typeMSTMoveGroupBox->Location = System::Drawing::Point(969, 434);
+			this->typeMSTMoveGroupBox->Location = System::Drawing::Point(999, 581);
 			this->typeMSTMoveGroupBox->Name = L"typeMSTMoveGroupBox";
-			this->typeMSTMoveGroupBox->Size = System::Drawing::Size(196, 105);
+			this->typeMSTMoveGroupBox->Size = System::Drawing::Size(196, 91);
 			this->typeMSTMoveGroupBox->TabIndex = 33;
 			this->typeMSTMoveGroupBox->TabStop = false;
 			this->typeMSTMoveGroupBox->Text = L"“ËÔ ÔÂÂÏÂ˘ÂÌËˇ";
@@ -479,7 +479,7 @@ namespace FormNamespace {
 			this->selectButton->BackColor = System::Drawing::Color::White;
 			this->selectButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->selectButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"selectButton.Image")));
-			this->selectButton->Location = System::Drawing::Point(445, 36);
+			this->selectButton->Location = System::Drawing::Point(445, 55);
 			this->selectButton->Name = L"selectButton";
 			this->selectButton->Size = System::Drawing::Size(52, 52);
 			this->selectButton->TabIndex = 36;
@@ -497,6 +497,48 @@ namespace FormNamespace {
 			this->InfoChoicedVertexLabel->TabIndex = 37;
 			this->InfoChoicedVertexLabel->Text = L"*¬˚·‡ÌÌ‡ˇ ‚Â¯ËÌ‡ - ˝ÚÓ ÌÓÏÂ ÒÚÓÍË ‚˚·‡ÌÌÓÈ ˇ˜ÂÈÍË ‚ Ï‡ÚËˆÂ ÒÏÂÊÌÓÒÚË";
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->BackColor = System::Drawing::Color::White;
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->ÒÔ‡‚Í‡ToolStripMenuItem,
+					this->‚˚ıÓ‰ToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(1236, 24);
+			this->menuStrip1->TabIndex = 38;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// ÒÔ‡‚Í‡ToolStripMenuItem
+			// 
+			this->ÒÔ‡‚Í‡ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->‚ToolStripMenuItem,
+					this->toolStripMenuItem2
+			});
+			this->ÒÔ‡‚Í‡ToolStripMenuItem->Name = L"ÒÔ‡‚Í‡ToolStripMenuItem";
+			this->ÒÔ‡‚Í‡ToolStripMenuItem->Size = System::Drawing::Size(65, 20);
+			this->ÒÔ‡‚Í‡ToolStripMenuItem->Text = L"—Ô‡‚Í‡";
+			// 
+			// ‚ToolStripMenuItem
+			// 
+			this->‚ToolStripMenuItem->Name = L"‚ToolStripMenuItem";
+			this->‚ToolStripMenuItem->Size = System::Drawing::Size(80, 22);
+			this->‚ToolStripMenuItem->Text = L"1";
+			// 
+			// toolStripMenuItem2
+			// 
+			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
+			this->toolStripMenuItem2->Size = System::Drawing::Size(80, 22);
+			this->toolStripMenuItem2->Text = L"2";
+			// 
+			// ‚˚ıÓ‰ToolStripMenuItem
+			// 
+			this->‚˚ıÓ‰ToolStripMenuItem->Name = L"‚˚ıÓ‰ToolStripMenuItem";
+			this->‚˚ıÓ‰ToolStripMenuItem->Size = System::Drawing::Size(54, 20);
+			this->‚˚ıÓ‰ToolStripMenuItem->Text = L"¬˚ıÓ‰";
+			this->‚˚ıÓ‰ToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form::‚˚ıÓ‰ToolStripMenuItem_Click);
+			// 
 			// Form
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -510,7 +552,6 @@ namespace FormNamespace {
 			this->Controls->Add(this->InfoMatrixGridLabel);
 			this->Controls->Add(this->countVertexMatrixGridNumericUpDown);
 			this->Controls->Add(this->label4);
-			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->deleteButton);
@@ -523,6 +564,8 @@ namespace FormNamespace {
 			this->Controls->Add(this->primButton);
 			this->Controls->Add(this->edgesPrimListBox);
 			this->Controls->Add(this->typeInputGroup);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form";
 			this->Text = L"¿Î„ÓËÚÏ œËÏ‡";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->lengthGrid))->EndInit();
@@ -532,6 +575,8 @@ namespace FormNamespace {
 			this->typeInputGroup->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->countVertexMatrixGridNumericUpDown))->EndInit();
 			this->typeMSTMoveGroupBox->ResumeLayout(false);
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -544,7 +589,7 @@ namespace FormNamespace {
 			System::Void drawEdgeButton_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void FillLengthGrid();
 			System::Void FillMatrixGrid(int numberV, bool columnIsReadOnly);
-			System::Void lengthGrid_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
+			System::Void lengthGrid_RowsAdded(System::Object^ sender, System::Windows::Forms::DataGridViewRowsAddedEventArgs^ e);
 			System::Drawing::Bitmap^ CreateGraphFromMatrix(List<Tuple<int, int>^>^ MSTEdges);
 			System::Boolean AlgorithmByPrim();
 			System::Void  TotalClearWithountType();
@@ -593,7 +638,9 @@ namespace FormNamespace {
 				return true;
 			}
 
-
+private: System::Void ‚˚ıÓ‰ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
+}
 };
 
 }

@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "Form.h"
 #include "Utilities.h";
-
+using namespace Microsoft::VisualBasic;
 using namespace System::Windows::Forms;
 using namespace UtilitiesNamespace;
-
+using namespace System::Runtime::InteropServices;
 System::Void FormNamespace::Form::drawVertexButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	selectButton->Enabled = true;
 	drawVertexButton->Enabled = false;
@@ -72,6 +72,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 		else if (drawVertexButton->Enabled == false)
 		{
 			if (V->Count >= maxCountVertex)
+				
 				MessageBox::Show("Достигнуто максимальное количество точек (" + maxCountVertex + ")");
 			else {
 				V->Add(gcnew Vertex(e->Location.X, e->Location.Y));
@@ -85,6 +86,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 		else if (drawEdgeButton->Enabled == false) {
 			if (e->Button == System::Windows::Forms::MouseButtons::Left)
 			{
+
 				for (int i = 0; i < V->Count; i++)
 				{
 					if (Math::Pow((V[i]->X - e->Location.X), 2) + Math::Pow((V[i]->Y - e->Location.Y), 2) <= G->R * G->R)
@@ -98,23 +100,34 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 						}
 						if (selectedTwo == -1)
 						{
+
 							selectedTwo = i;
 							Edge^ edgeNew = gcnew Edge(selectedOne, selectedTwo, nullptr);
 							if (E->Find(
 								gcnew Predicate<Edge^>(gcnew EdgePredicate(edgeNew), &EdgePredicate::Matched)
 							) ==nullptr) {
-								G->DrawSelectedVertex(V[i]->X, V[i]->Y);
-								E->Add(gcnew Edge(selectedOne, selectedTwo, nullptr));
-								G->DrawEdge(V[selectedOne], V[selectedTwo], E[E->Count - 1], E->Count - 1);
+
+								String^ input =
+									Interaction::InputBox("Введите вес указанного ребра:", "Ввод веса", nullptr, this->Left + (this->Width / 2) - 200, this->Top + (this->Height / 2) - 100);
+								int result;
+								if (System::Int32::TryParse(input, result) && result >= minLengthEdge && result <= maxLengthEdge) {
+
+									G->DrawSelectedVertex(V[i]->X, V[i]->Y);
+									E->Add(gcnew Edge(selectedOne, selectedTwo, (Nullable<int>)result));
+									G->DrawEdge(V[selectedOne], V[selectedTwo], E[E->Count - 1], result.ToString());
+								}
+								else 
+									MessageBox::Show("Введёное значение не является числом или выходит за пределы диапазона (to 0 from 1000)!");
+								
+
 								
 							}
-							else {
+							else
 								MessageBox::Show("Ребро между вершинами уже назначено!");
-								G->DrawALLGraph(V,E,nullptr);
-							}
 								
 							selectedOne = -1;
 							selectedTwo = -1;
+							G->DrawALLGraph(V, E, nullptr);
 							sheet->Image = G->GetBitmap();
 							break;
 
@@ -249,22 +262,9 @@ System::Void  FormNamespace::Form::TotalClearWithountType() {
 	choicedVertexTextBox->Text = "";
 
 }
-System::Void FormNamespace::Form::lengthGrid_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-	for (int i = 0; i < lengthGrid->RowCount; i++) {
-		int valueLengthCell;
-		bool validateValueType = System::Int32::TryParse(lengthGrid->Rows[i]->Cells["Weight"]->Value->ToString(), valueLengthCell);
-		if (validateValueType == true && valueLengthCell >= minLengthEdge && valueLengthCell <= maxLengthEdge)
-			E[i]->Weight = valueLengthCell;
-		else {
-			lengthGrid->Rows[i]->Cells["Weight"]->Value = 0;
-			E[i]->Weight = 0;
-		}
-
-	}
+System::Void FormNamespace::Form::lengthGrid_RowsAdded(System::Object^ sender, System::Windows::Forms::DataGridViewRowsAddedEventArgs^ e) {
 	if (V != nullptr)
 		FillMatrixGrid(V->Count, true);
-
-
 }
 System::Void FormNamespace::Form::matrixGrid_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	this->matrixGrid->CellValueChanged -= gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &FormNamespace::Form::matrixGrid_CellValueChanged);
@@ -289,12 +289,10 @@ System::Void FormNamespace::Form::countVertexMatrixGridNumericUpDown_ValueChange
 	FillMatrixGrid(System::Convert::ToInt32(numericUpDown->Value),false);
 }
 System::Void FormNamespace::Form::FillLengthGrid() {
-	System::Char letter;
 	lengthGrid->Rows->Clear();
 	for (int i = 0; i < E->Count; i++)
 	{
-		letter = char(int('A') + i);
-		lengthGrid->Rows->Add(E[i]->V1 + 1, E[i]->V2 + 1, E[i]->Weight, letter.ToString());
+		lengthGrid->Rows->Add(E[i]->V1 + 1, E[i]->V2 + 1, E[i]->Weight);
 	}
 }
 
