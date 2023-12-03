@@ -74,11 +74,17 @@ namespace FormNamespace {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ V1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ V2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Weight;
-	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::MenuStrip^ panelControl;
+
+
 	private: System::Windows::Forms::ToolStripMenuItem^ ñïğàâêàToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ âToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ panelControlMenuItem1;
+
+
+
 	private: System::Windows::Forms::ToolStripMenuItem^ âûõîäToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ toolStripMenuItem2;
+	private: System::Windows::Forms::ToolStripMenuItem^ panelControlMenuItem2;
+
 
 
 
@@ -181,10 +187,10 @@ namespace FormNamespace {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->selectButton = (gcnew System::Windows::Forms::Button());
 			this->InfoChoicedVertexLabel = (gcnew System::Windows::Forms::Label());
-			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->panelControl = (gcnew System::Windows::Forms::MenuStrip());
 			this->ñïğàâêàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->âToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->toolStripMenuItem2 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->panelControlMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->panelControlMenuItem2 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->âûõîäToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->lengthGrid))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sheet))->BeginInit();
@@ -192,7 +198,7 @@ namespace FormNamespace {
 			this->typeInputGroup->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->countVertexMatrixGridNumericUpDown))->BeginInit();
 			this->typeMSTMoveGroupBox->SuspendLayout();
-			this->menuStrip1->SuspendLayout();
+			this->panelControl->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// lengthGrid
@@ -497,40 +503,42 @@ namespace FormNamespace {
 			this->InfoChoicedVertexLabel->TabIndex = 37;
 			this->InfoChoicedVertexLabel->Text = L"*Âûáğàííàÿ âåğøèíà - ıòî íîìåğ ñòğîêè âûáğàííîé ÿ÷åéêè â ìàòğèöå ñìåæíîñòè";
 			// 
-			// menuStrip1
+			// panelControl
 			// 
-			this->menuStrip1->BackColor = System::Drawing::Color::White;
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->panelControl->BackColor = System::Drawing::Color::White;
+			this->panelControl->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->ñïğàâêàToolStripMenuItem,
 					this->âûõîäToolStripMenuItem
 			});
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1236, 24);
-			this->menuStrip1->TabIndex = 38;
-			this->menuStrip1->Text = L"menuStrip1";
+			this->panelControl->Location = System::Drawing::Point(0, 0);
+			this->panelControl->Name = L"panelControl";
+			this->panelControl->Size = System::Drawing::Size(1236, 24);
+			this->panelControl->TabIndex = 38;
+			this->panelControl->Text = L"menuStrip1";
 			// 
 			// ñïğàâêàToolStripMenuItem
 			// 
 			this->ñïğàâêàToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->âToolStripMenuItem,
-					this->toolStripMenuItem2
+				this->panelControlMenuItem1,
+					this->panelControlMenuItem2
 			});
 			this->ñïğàâêàToolStripMenuItem->Name = L"ñïğàâêàToolStripMenuItem";
 			this->ñïğàâêàToolStripMenuItem->Size = System::Drawing::Size(65, 20);
 			this->ñïğàâêàToolStripMenuItem->Text = L"Ñïğàâêà";
 			// 
-			// âToolStripMenuItem
+			// panelControlMenuItem1
 			// 
-			this->âToolStripMenuItem->Name = L"âToolStripMenuItem";
-			this->âToolStripMenuItem->Size = System::Drawing::Size(80, 22);
-			this->âToolStripMenuItem->Text = L"1";
+			this->panelControlMenuItem1->Name = L"panelControlMenuItem1";
+			this->panelControlMenuItem1->Size = System::Drawing::Size(180, 22);
+			this->panelControlMenuItem1->Text = L"1";
+			this->panelControlMenuItem1->Click += gcnew System::EventHandler(this, &Form::panelControlMenuItem1_Click);
 			// 
-			// toolStripMenuItem2
+			// panelControlMenuItem2
 			// 
-			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
-			this->toolStripMenuItem2->Size = System::Drawing::Size(80, 22);
-			this->toolStripMenuItem2->Text = L"2";
+			this->panelControlMenuItem2->Name = L"panelControlMenuItem2";
+			this->panelControlMenuItem2->Size = System::Drawing::Size(180, 22);
+			this->panelControlMenuItem2->Text = L"2";
+			this->panelControlMenuItem2->Click += gcnew System::EventHandler(this, &Form::panelControlMenuItem2_Click);
 			// 
 			// âûõîäToolStripMenuItem
 			// 
@@ -564,8 +572,8 @@ namespace FormNamespace {
 			this->Controls->Add(this->primButton);
 			this->Controls->Add(this->edgesPrimListBox);
 			this->Controls->Add(this->typeInputGroup);
-			this->Controls->Add(this->menuStrip1);
-			this->MainMenuStrip = this->menuStrip1;
+			this->Controls->Add(this->panelControl);
+			this->MainMenuStrip = this->panelControl;
 			this->Name = L"Form";
 			this->Text = L"Àëãîğèòì Ïğèìà";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->lengthGrid))->EndInit();
@@ -575,8 +583,8 @@ namespace FormNamespace {
 			this->typeInputGroup->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->countVertexMatrixGridNumericUpDown))->EndInit();
 			this->typeMSTMoveGroupBox->ResumeLayout(false);
-			this->menuStrip1->ResumeLayout(false);
-			this->menuStrip1->PerformLayout();
+			this->panelControl->ResumeLayout(false);
+			this->panelControl->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -605,7 +613,8 @@ namespace FormNamespace {
 			System::Void selectButton_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void âûõîäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void matrixGrid_CellEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
-
+			System::Void panelControlMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void panelControlMenuItem2_Click(System::Object^ sender, System::EventArgs^ e);
 			void traverse(int s, bool visited[], array<int, 2>^ graph, int NODE) {
 				visited[s] = true; 
 				std::queue<int> que;
@@ -637,6 +646,9 @@ namespace FormNamespace {
 				}
 				return true;
 			}
+
+
+
 
 
 };

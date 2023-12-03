@@ -133,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Edge.h" />
+    <ClInclude Include="Form_1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Form_2.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Form.h">
       <FileType>CppForm</FileType>
@@ -144,6 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="Form_1.cpp" />
+    <ClCompile Include="Form_2.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Form.cpp" />

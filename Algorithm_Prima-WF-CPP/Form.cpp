@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Form.h"
 #include "Utilities.h";
+#include "Form_1.h"
+#include "Form_2.h"
 using namespace Microsoft::VisualBasic;
 using namespace System::Windows::Forms;
 using namespace UtilitiesNamespace;
@@ -557,4 +559,12 @@ System::Void FormNamespace::Form::momentButton_Click(System::Object^ sender, Sys
 }
 System::Void FormNamespace::Form::âûõîäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();
+}
+System::Void FormNamespace::Form::panelControlMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) {
+	FormNamespace::Form_1^ form_1 = gcnew FormNamespace::Form_1();
+	form_1->Show();
+}
+System::Void FormNamespace::Form::panelControlMenuItem2_Click(System::Object^ sender, System::EventArgs^ e) {
+	FormNamespace::Form_2^ form_2 = gcnew FormNamespace::Form_2();
+	form_2->Show();
 }
