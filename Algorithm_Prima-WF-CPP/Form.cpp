@@ -555,3 +555,6 @@ System::Void FormNamespace::Form::momentButton_Click(System::Object^ sender, Sys
 	typeMSTMoveGroupBox->Enabled = false;
 	sheet->Image = G->GetBitmap();
 }
+System::Void FormNamespace::Form::âûõîäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
+}

@@ -603,7 +603,7 @@ namespace FormNamespace {
 			System::Void stageButton_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void momentButton_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void selectButton_Click(System::Object^ sender, System::EventArgs^ e);
-		
+			System::Void ‚˚ıÓ‰ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void matrixGrid_CellEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
 
 			void traverse(int s, bool visited[], array<int, 2>^ graph, int NODE) {
@@ -638,9 +638,7 @@ namespace FormNamespace {
 				return true;
 			}
 
-private: System::Void ‚˚ıÓ‰ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
+
 };
 
 }
