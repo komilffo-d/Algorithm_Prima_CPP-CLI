@@ -7,6 +7,8 @@ using namespace Microsoft::VisualBasic;
 using namespace System::Windows::Forms;
 using namespace UtilitiesNamespace;
 using namespace System::Runtime::InteropServices;
+
+//События клика на кнопку рисования вершин
 System::Void FormNamespace::Form::drawVertexButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	selectButton->Enabled = true;
 	drawVertexButton->Enabled = false;
@@ -17,6 +19,7 @@ System::Void FormNamespace::Form::drawVertexButton_Click(System::Object^ sender,
 	G->DrawALLGraph(V, E, nullptr);
 	sheet->Image = G->GetBitmap();
 }
+//События клика на кнопку рисования рёбер
 System::Void FormNamespace::Form::drawEdgeButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	selectButton->Enabled = true;
 	drawVertexButton->Enabled = true;
@@ -29,6 +32,7 @@ System::Void FormNamespace::Form::drawEdgeButton_Click(System::Object^ sender, S
 	G->DrawALLGraph(V, E, nullptr);
 	sheet->Image = G->GetBitmap();
 }
+//События клика на кнопку удаления вершин или рёбер
 System::Void FormNamespace::Form::deleteButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	selectButton->Enabled = true;
 	drawVertexButton->Enabled = true;
@@ -39,6 +43,7 @@ System::Void FormNamespace::Form::deleteButton_Click(System::Object^ sender, Sys
 	G->DrawALLGraph(V, E, nullptr);
 	sheet->Image = G->GetBitmap();
 }
+//События клика на кнопку выбора вершины
 System::Void FormNamespace::Form::selectButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	selectButton->Enabled = false;
 	drawVertexButton->Enabled = true;
@@ -47,11 +52,15 @@ System::Void FormNamespace::Form::selectButton_Click(System::Object^ sender, Sys
 	clearButton->Enabled = true;
 
 }
+//События клика на холст
 System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	//Если холст можно изменять вручную
 	if (sheet->Enabled) {
+		//Если кнопка выбора вершины включена
 		if (selectButton->Enabled == false) {
 			for (int i = 0; i < V->Count; i++)
 			{
+				//Если координаты нажатия совпадают в площадью вершины
 				if (Math::Pow((V[i]->X - e->X), 2) + Math::Pow((V[i]->Y - e->Y), 2) <= G->R * G->R)
 				{
 					if (selectedOne != -1)
@@ -71,6 +80,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 				}
 			}
 		}
+		//Если кнопка рисования вершин включена
 		else if (drawVertexButton->Enabled == false)
 		{
 			if (V->Count >= maxCountVertex)
@@ -85,14 +95,17 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 			FillMatrixGrid(V->Count, true);
 
 		}
+		//Если кнопка рисования граней включена
 		else if (drawEdgeButton->Enabled == false) {
 			if (e->Button == System::Windows::Forms::MouseButtons::Left)
 			{
 
 				for (int i = 0; i < V->Count; i++)
 				{
+					//Если координаты нажатия совпадают в площадью вершины
 					if (Math::Pow((V[i]->X - e->Location.X), 2) + Math::Pow((V[i]->Y - e->Location.Y), 2) <= G->R * G->R)
 					{
+						//Если первая вершина не выбрана
 						if (selectedOne == -1)
 						{
 							G->DrawSelectedVertex(V[i]->X, V[i]->Y);
@@ -100,6 +113,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 							sheet->Image = G->GetBitmap();
 							break;
 						}
+						//Если вторая вершина не выбрана
 						if (selectedTwo == -1)
 						{
 
@@ -139,6 +153,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 				FillLengthGrid();
 			}
 		}
+		//Если кнопка удаления вершин и граней включена
 		else if (deleteButton->Enabled == false)
 		{
 			bool flag = false; 
@@ -164,6 +179,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 					break;
 				}
 			}
+			//Если вершина не была удалена, проверяем среди граней
 			if (!flag)
 			{
 				for (int i = 0; i < E->Count; i++)
@@ -194,7 +210,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 					}
 				}
 			}
-
+			//Если что-то было удалено - перерисовываем холст
 			if (flag)
 			{
 				G->ClearSheet();
@@ -206,6 +222,7 @@ System::Void FormNamespace::Form::sheet_MouseClick(System::Object^ sender, Syste
 		}
 	}
 }
+//Очистка холста
 System::Void FormNamespace::Form::clearButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
 	String^ message = "Вы действительно хотите полностью удалить граф?";
@@ -216,6 +233,7 @@ System::Void FormNamespace::Form::clearButton_Click(System::Object^ sender, Syst
 		TotalClearWithountType();
 	}
 }
+//Выбор создания графа по матрице
 System::Void FormNamespace::Form::typeInputRadioButton_1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 	RadioButton ^radioButton =(RadioButton^)(sender);
 	if (radioButton->Checked) {
@@ -232,6 +250,7 @@ System::Void FormNamespace::Form::typeInputRadioButton_1_CheckedChanged(System::
 		TotalClearWithountType();
 	}
 }
+//Выбор создания графа по холсту
 System::Void FormNamespace::Form::typeInputRadioButton_2_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 	RadioButton^ radioButton = (RadioButton^)(sender);
 	if (radioButton->Checked) {
@@ -249,6 +268,7 @@ System::Void FormNamespace::Form::typeInputRadioButton_2_CheckedChanged(System::
 		TotalClearWithountType();
 	}
 }
+//Очистка состояния приложения
 System::Void  FormNamespace::Form::TotalClearWithountType() {
 	matrixGrid->DataSource = nullptr;
 	matrixGrid->Rows->Clear();
@@ -264,10 +284,12 @@ System::Void  FormNamespace::Form::TotalClearWithountType() {
 	choicedVertexTextBox->Text = "";
 
 }
+//События добавления строки в матрицу длин рёбер - нужно для динамического помещения данных в матрицу смежности
 System::Void FormNamespace::Form::lengthGrid_RowsAdded(System::Object^ sender, System::Windows::Forms::DataGridViewRowsAddedEventArgs^ e) {
 	if (V != nullptr)
 		FillMatrixGrid(V->Count, true);
 }
+//Событие изменения значения ячейки в матрице смежности
 System::Void FormNamespace::Form::matrixGrid_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	this->matrixGrid->CellValueChanged -= gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &FormNamespace::Form::matrixGrid_CellValueChanged);
 	int valueLengthCell;
@@ -286,10 +308,12 @@ System::Void FormNamespace::Form::matrixGrid_CellValueChanged(System::Object^ se
 	sheet->Image = G->GetBitmap();
 
 }
+//События изменения значения количества вершин на матрице смежности
 System::Void FormNamespace::Form::countVertexMatrixGridNumericUpDown_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
 	NumericUpDown^ numericUpDown = (NumericUpDown^)(sender);
 	FillMatrixGrid(System::Convert::ToInt32(numericUpDown->Value),false);
 }
+//Заполнение матрицы длин рёбер по массиву граней - E
 System::Void FormNamespace::Form::FillLengthGrid() {
 	lengthGrid->Rows->Clear();
 	for (int i = 0; i < E->Count; i++)
@@ -297,7 +321,7 @@ System::Void FormNamespace::Form::FillLengthGrid() {
 		lengthGrid->Rows->Add(E[i]->V1 + 1, E[i]->V2 + 1, E[i]->Weight);
 	}
 }
-
+//Заполенение матрицы смежности по массиву граней - E
 System::Void FormNamespace::Form::FillMatrixGrid(int numberV, bool columnIsReadOnly) {
 	List<List<System::Int32>^> ^matrix = gcnew List<List<System::Int32>^>();
 	G->FillAdjacencyMatrix(numberV, E, matrix);
@@ -332,7 +356,7 @@ System::Void FormNamespace::Form::FillMatrixGrid(int numberV, bool columnIsReadO
 	this->matrixGrid->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &FormNamespace::Form::matrixGrid_CellValueChanged);
 }
 
-
+//Рисование графа по матрицу смежности - применяется библиотека MSAGL
 System::Drawing::Bitmap^ FormNamespace::Form::CreateGraphFromMatrix(List<Tuple<int, int>^>^ MSTEdges)
 {
 	Microsoft::Msagl::Drawing::Graph^ graph = gcnew Microsoft::Msagl::Drawing::Graph("graph");
@@ -399,13 +423,11 @@ System::Drawing::Bitmap^ FormNamespace::Form::CreateGraphFromMatrix(List<Tuple<i
 
 	Bitmap^ bitmap = gcnew Bitmap(width,height , System::Drawing::Imaging::PixelFormat::Format32bppPArgb);
 	renderer->Render(bitmap);
-	// ЗАДЕЛ НА БУДУЩЕЕ
-	//for each (auto node in graph->Nodes) {
-	//	MessageBox::Show(node->GeometryNode->Center.X.ToString() + " " + node->GeometryNode->Center.Y.ToString());
-	//}
+
 
 	return bitmap;
 }
+//Реализация алгоритма Прима
 System::Boolean FormNamespace::Form::AlgorithmByPrim()
 {
 	array<int, 2>^ G = gcnew array<int, 2>(matrixGrid->RowCount, matrixGrid->ColumnCount);
@@ -490,7 +512,7 @@ System::Boolean FormNamespace::Form::AlgorithmByPrim()
 
 
 }
-
+//Нажатие на кнопку "Алгоритм Прима"
 System::Void FormNamespace::Form::primButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	edgesPrimListBox->Items->Clear();
 	if (AlgorithmByPrim()) {
@@ -518,11 +540,13 @@ System::Void FormNamespace::Form::primButton_Click(System::Object^ sender, Syste
 	}
 
 }
+//Соьытия выбора ячейки на матрице смежности - нужно, чтобы назначалась выбранная вершина в режиме "создания графа по матрице"
 System::Void FormNamespace::Form::matrixGrid_CellEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	if (typeInputRadioButton_1->Checked == true) {
 		choicedVertexTextBox->Text = (e->RowIndex + 1).ToString();
 	}
 }
+//Нажатие на кнопку "Далее" для подробного изучения Алгоритма Прима
 System::Void FormNamespace::Form::stageButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	G->ClearSheet();
 	if (typeInputRadioButton_1->Checked == true) {
@@ -545,6 +569,7 @@ System::Void FormNamespace::Form::stageButton_Click(System::Object^ sender, Syst
 	}
 	sheet->Image = G->GetBitmap();
 }
+//Нажатия на кнопку "Моментально" для явной визуализации результата Алгоритма Прима
 System::Void FormNamespace::Form::momentButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	G->ClearSheet();
 	if (typeInputRadioButton_1->Checked == true)
@@ -557,13 +582,16 @@ System::Void FormNamespace::Form::momentButton_Click(System::Object^ sender, Sys
 	typeMSTMoveGroupBox->Enabled = false;
 	sheet->Image = G->GetBitmap();
 }
+//Пункт меню "Выход"
 System::Void FormNamespace::Form::выходToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();
 }
+//Пункт меню "1"
 System::Void FormNamespace::Form::panelControlMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) {
 	FormNamespace::Form_1^ form_1 = gcnew FormNamespace::Form_1();
 	form_1->Show();
 }
+//Пункт меню "2"
 System::Void FormNamespace::Form::panelControlMenuItem2_Click(System::Object^ sender, System::EventArgs^ e) {
 	FormNamespace::Form_2^ form_2 = gcnew FormNamespace::Form_2();
 	form_2->Show();
