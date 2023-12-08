@@ -402,11 +402,12 @@ System::Drawing::Bitmap^ FormNamespace::Form::CreateGraphFromMatrix(List<Tuple<i
 
 
 				String^ label = (i+1).ToString() + "-" + (j+1).ToString();
-				Microsoft::Msagl::Drawing::Edge ^edge = graph->AddEdge((i+1).ToString(), (j + 1).ToString());
+				Microsoft::Msagl::Drawing::Edge ^edge = graph->AddEdge((i+1).ToString(), adjacencyMatrix[i, j].ToString(), (j + 1).ToString());
+				edge->Label->FontSize = 7;
 				if (MSTEdges && (MSTEdges->Contains(gcnew Tuple<int,int>(i,j)) || MSTEdges->Contains(gcnew Tuple<int, int>(j, i)))) {
 					edge->Attr->Color = Microsoft::Msagl::Drawing::Color::Red;
 				}
-				
+
 				edge->Attr->Weight = adjacencyMatrix[i, j];
 				edge->Attr->Id = label;
 				edge->Attr->ArrowheadAtTarget = Microsoft::Msagl::Drawing::ArrowStyle::None;
