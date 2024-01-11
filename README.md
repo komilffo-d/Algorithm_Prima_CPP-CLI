@@ -1,4 +1,4 @@
-# Algorithm_Prima-WF-CPP
+# Algorithm_Prima_Visualizer
 
 # Hi, I'm Daniil! 👋
 This is a software with the ability to draw a graph based on the adjacency matrix and manually draw an object.
